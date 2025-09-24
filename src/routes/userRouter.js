@@ -34,7 +34,7 @@ userRouter.get('/connections', userAuth, async (req, res) => {
             $and: [{status : "accepted" }]
         }).populate("fromUserId", "firstName lastName").populate("toUserId","firstName lastName")
         const response = data.map(({fromUserId, toUserId})=> fromUserId.equals(loggedInUser._id) ? toUserId : fromUserId)
-        res.json({response});
+        res.json(response);
     }
     catch (err) {
         res.status(400).send("Error occured: " + err.message);

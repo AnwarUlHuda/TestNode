@@ -13,7 +13,10 @@ authRouter.post('/signUp', async (req, res) => {
     const user = new User({firstName , lastName , emailId , password : hashPassword});
     try {
         await user.save();
-        res.send("User Added Successfully");
+        const id= user._id;
+        const token = jwt.sign({id : user._id},"DevTinder@1%7");
+        res.cookie('token',token)
+        res.send(user);
     }
     catch (err) {
         res.status(500).send("error occured "+ err.message)

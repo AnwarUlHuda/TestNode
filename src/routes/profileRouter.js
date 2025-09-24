@@ -25,7 +25,7 @@ profileRouter.get('/allUsers', userAuth, async (req, res) => {
 });
 
 profileRouter.patch('/edit', userAuth, async (req, res) => {
-    const allowedEdit = ["skills", "age", "about", "photoUrl", "gender"]
+    const allowedEdit = ["skills", "age", "about", "photoUrl", "gender", "firstName", "lastName"]
     try {
         const isEditAllowed = Object.keys(req.body).every(field => allowedEdit.includes(field))
         if (!isEditAllowed) {

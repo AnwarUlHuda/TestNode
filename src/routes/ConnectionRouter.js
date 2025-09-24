@@ -47,7 +47,7 @@ connectionRequest.post('/request/send/:status/:toUserId', userAuth, async (req, 
         })
         await sendRequest.save();
         if (status == 'interested') {
-            res.send({ message: 'Connection request sent successfully' });
+            return res.send({ message: 'Connection request sent successfully' });
         }
         res.send("Profile Ignored successfully");
     }
