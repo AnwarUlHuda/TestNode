@@ -32,7 +32,7 @@ userRouter.get('/connections', userAuth, async (req, res) => {
         const data = await ConnectionModel.find({
             $or: [{fromUserId : loggedInUser._id},{toUserId : loggedInUser._id}],
             $and: [{status : "accepted" }]
-        }).populate("fromUserId", "firstName lastName").populate("toUserId","firstName lastName")
+        }).populate("fromUserId", "firstName lastName photoUrl").populate("toUserId","firstName lastName photoUrl")
         const response = data.map(({fromUserId, toUserId})=> fromUserId.equals(loggedInUser._id) ? toUserId : fromUserId)
         res.json(response);
     }

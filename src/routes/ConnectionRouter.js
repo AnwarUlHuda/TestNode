@@ -16,7 +16,7 @@ connectionRequest.post('/request/send/:status/:toUserId', userAuth, async (req, 
         if (!['interested', 'ignored'].includes(status)) {
             return res.status(400).send({ message: `Invalid status type: ${status}` })
         }
-        const userExist = await User.findById(toUserId)
+        const userExist = await User.findById(toUserId);
         if(!userExist){
             return res.status(400).json({message : 'User not found'});
         }
@@ -64,10 +64,11 @@ connectionRequest.post('/request/review/:status/:requestId', userAuth, async (re
             return res.status(400).json({message : `${status} not allowed`});
         }
         const userExist = await ConnectionModel.findOne({
-            _id : requestId,
+            fromUserId : requestId,
             toUserId : loggedInUser,
             status : "interested"
         });
+        console.log(userExist);
 
         if(!userExist){
             return res.status(400).json({message : "Connection request not founnd"});
