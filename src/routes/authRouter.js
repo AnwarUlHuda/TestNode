@@ -14,7 +14,7 @@ authRouter.post('/signUp', async (req, res) => {
     try {
         await user.save();
         const id= user._id;
-        const token = jwt.sign({id : user._id},"DevTinder@1%7");
+        const token = jwt.sign({id : user._id},process.env.JWT_SECRET_KEY);
         res.cookie('token',token)
         res.send(user);
     }
@@ -38,7 +38,7 @@ authRouter.post('/login',async (req,res) => {
         throw new Error("Invalid Credentials");
     }
     if(isPasswordValid) {
-        const token = jwt.sign({id : user._id},"DevTinder@1%7");
+        const token = jwt.sign({id : user._id},process.env.JWT_SECRET_KEY);
 
         res.cookie('token',token)
         res.send(user);
