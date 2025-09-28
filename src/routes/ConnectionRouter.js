@@ -68,7 +68,6 @@ connectionRequest.post('/request/review/:status/:requestId', userAuth, async (re
             toUserId : loggedInUser,
             status : "interested"
         });
-        console.log(userExist);
 
         if(!userExist){
             return res.status(400).json({message : "Connection request not founnd"});
